@@ -67,6 +67,28 @@ A–B khác vì B chia cấu trúc quyết định và có bước duyệt; A–
 
 ## 5. Test Prompt
 
+### Phạm vi micro-prototype
+
+| Option | Trạng thái 1 | Trạng thái 2 | Trạng thái 3 |
+|---|---|---|---|
+| A | Đọc bối cảnh và checklist | Tra cứu tài liệu, tự sửa editor | Kiểm tra kết quả, sửa lại hoặc reset |
+| B | Trả lời câu chẩn đoán | Duyệt/sửa từng bước PORT, host và Dockerfile | Kiểm tra kết quả; quay lại hoặc dừng/tiếp tục |
+| C | Đọc chẩn đoán và diff đề xuất | Duyệt, chỉnh hoặc bác bỏ bản vá | Kiểm tra kết quả; rollback hoặc báo đề xuất sai |
+
+Ba option nằm trong một trang với tab chuyển đổi, tập trung vào một tương tác then chốt. Không có đăng nhập hay backend. Kết quả kiểm tra chỉ phản ánh mã mẫu được prototype hỗ trợ; không chứng minh mã tùy ý chạy được trên Cloud Run.
+
+### Observation Focus
+
+1. Thao tác đầu tiên sau khi nhận task.
+2. Chỗ ngập ngừng quá ba giây, kèm thời điểm và trạng thái màn hình.
+3. Nguồn nào được mở/đọc hoặc bỏ qua.
+4. Hiểu sai về việc AI đã đề xuất hay đã áp dụng mã.
+5. Lúc cần trợ giúp và lời cứu hộ thực tế của người điều phối.
+6. Cách sửa sai, bác bỏ, quay lại hoặc khôi phục.
+7. Phương án được chọn sau cả ba, lý do và đánh đổi chấp nhận.
+
+Ghi thêm kết quả task và cách giải thích nguyên nhân. Câu cứu hộ trung tính: “Bạn đang nghĩ gì ở bước này?”, “Bạn dự định làm gì tiếp theo?”, “Bạn kỳ vọng điều gì xảy ra khi thực hiện thao tác đó?”.
+
 **Context question (tối đa hai phút):** “Gần đây bạn có từng gặp khó khăn khi làm một bước deploy hoặc sửa lỗi bài tập kỹ thuật không? Kể ngắn lần đó.”
 
 **Outcome task:** “Trên màn hình là một bài deploy gặp lỗi. Với mỗi phương án, hãy tìm nguyên nhân, chọn cách sửa và kiểm tra kết quả. Sau đó giải thích cách sửa bạn chọn.”

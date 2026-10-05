@@ -25,11 +25,12 @@ Giữ task/code/log giống nhau cho A/B/C. Không chỉ nút hoặc bấm hộ;
 | Hành vi | A | B | C |
 |---|---|---|---|
 | First action | — | — | — |
-| Hesitation: vị trí/thời gian | — | — | — |
+| Hesitation > 3 giây: vị trí/thời gian | — | — | — |
 | Đọc hay bỏ qua evidence | — | — | — |
 | Hiểu sai tác dụng/kỳ vọng | — | — | — |
 | Help needed và cứu hộ đã dùng | — | — | — |
 | Correction/recovery | — | — | — |
+| Selected option / trade-off sau cả ba | — | — | — |
 | Task result và cách giải thích | — | — | — |
 
 Sau cả ba: lựa chọn của tester —; lý do —; đánh đổi chấp nhận —; exact quote nếu có —.
