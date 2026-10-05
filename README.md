@@ -1,6 +1,6 @@
 # Day 18–19 — Multiple Prototypes & Human–AI Design
 
-**Trạng thái:** Tổng hợp dữ liệu Day 17 của nhóm Tomorrow và kế thừa bộ thiết kế/prototype A/B/C của Vũ. Feedback prototype là biểu mẫu chờ điền từ phiên kiểm thử.
+**Trạng thái:** Báo cáo cá nhân trong bộ bài nhóm Tomorrow, sử dụng dữ liệu Day 17 và thiết kế/prototype A/B/C chung. Feedback prototype là biểu mẫu chờ điền từ phiên kiểm thử.
 
 ## 1. Thông tin cá nhân và nhóm
 
@@ -8,7 +8,7 @@
 - Nhóm Tomorrow: Đinh Trường An, Trần Phạm Thái Vũ, Hoàng Anh Tài.
 - Case A — AI Tutor: Diagnostic Refresher, kế thừa Day 17.
 - Theo [quy cách nộp trên VLearn](https://vlearn.dev/course/k04-l34-p2-t1/reader?day=D05&part=codelab-f3fc688af6874124b3d45f0d65a5a14e-s21-doc), repo đặt tên `Track1_Day18_2A202602393_DinhTruongAn` và có sáu tệp Markdown ở thư mục gốc.
-- Thiết kế/prototype kế thừa từ [repo của Trần Phạm Thái Vũ](https://github.com/elysszxje/Track1_Day19_2A202602695_TranPhamThaiVu/tree/338de81e5b4fd0bbd9ee485593db036b905b5c72), không nhận là mã do tôi tự viết.
+- Tài liệu và prototype chung của nhóm được lưu tại [kho làm việc Tomorrow](https://github.com/elysszxje/Track1_Day19_2A202602695_TranPhamThaiVu/tree/338de81e5b4fd0bbd9ee485593db036b905b5c72); các thành viên sử dụng chung theo quy định của lab.
 
 ## 2. Hypothesis Problem
 
@@ -30,13 +30,13 @@ Cả ba dùng cùng một lỗi Cloud Run giả lập, cùng code/log và cùng 
 
 Tôi cung cấp Interview Record Day 17 của lượt HV-A01: câu chuyện buổi học Track 1, cách ghi chú, xem lại video và tra cứu. Hồ sơ này được đưa vào Evidence Snapshot để đối chiếu với notes của Vũ và Tài, cùng các giới hạn về episode, thời gian và nguyên nhân chưa rõ.
 
-Phân công xây option và đóng góp vào bảng Human–AI chung: chưa có thông tin cụ thể để điền. Bộ mã A/B/C hiện tại được kế thừa từ repo của Vũ.
+Phân công xây option và đóng góp vào bảng Human–AI chung: chưa có thông tin cụ thể để điền. Bộ mã A/B/C là prototype dùng chung của nhóm Tomorrow.
 
 ## 5. Dữ liệu kiểm thử và bài học
 
 - [prototype-feedback-note.md](prototype-feedback-note.md): khung ghi phiên cá nhân A–B–C và bảy hành vi cần quan sát.
 - [group-feedback-synthesis.md](group-feedback-synthesis.md): tổng hợp ba Practice Notes Day 17, các giả thuyết rút ra và ma trận chờ dữ liệu test A/B/C.
-- **Next Change dự kiến:** thêm lựa chọn “Hướng dẫn từng bước” từ màn review diff C sang B, giữ cùng code/task. Kế thừa hướng C + B của Vũ, thu hẹp thành một thay đổi để kiểm tra; chưa coi là kết quả test.
+- **Next Change dự kiến:** thêm lựa chọn “Hướng dẫn từng bước” từ màn review diff C sang B, giữ cùng code/task. Dựa trên hướng C + B trong thiết kế chung, thu hẹp thành một thay đổi để kiểm tra; chưa coi là kết quả test.
 - **Still Unproven:** hoàn thành nhiệm vụ, khả năng phát hiện bản vá sai, nhu cầu dùng lại, hiệu quả học và retention đều chưa được xác minh bằng tester thực tế.
 
 ## 6. AI Support Log
@@ -52,4 +52,5 @@ Codex đọc repo nguồn, đối chiếu VLearn, tổng hợp ba notes Day 17 v
 | Human Control | Có design pass cho expectation, agency, evidence, recovery |
 | Test-ready | Đã cấu hình GitHub Pages công khai cho prototype A/B/C; chưa có dữ liệu thao tác của tester |
 | Learning, Not Praise | Có tổng hợp Day 17; ma trận feedback A/B/C chờ ba phiên kiểm thử |
+
 

@@ -4,7 +4,7 @@
 
 ## Công cụ dùng trong lần làm việc này
 
-Codex: đọc repo của Vũ và yêu cầu VLearn, đối chiếu với ba Practice Notes Day 17 đã được cung cấp, tổng hợp Evidence Snapshot, hypothesis và Solution Parking Lot vào sáu tệp Markdown. Dùng source A/B/C chung và giữ khung feedback để ghi phiên kiểm thử.
+Codex: đọc kho tài liệu chung Tomorrow và yêu cầu VLearn, đối chiếu với ba Practice Notes Day 17 đã được cung cấp, tổng hợp Evidence Snapshot, hypothesis và Solution Parking Lot vào sáu tệp Markdown. Dùng source A/B/C chung và giữ khung feedback để ghi phiên kiểm thử.
 
 ## AI hỗ trợ và các sửa đổi
 
@@ -19,8 +19,9 @@ Codex: đọc repo của Vũ và yêu cầu VLearn, đối chiếu với ba Prac
 
 ## Ranh giới công việc
 
-Lần cập nhật tiếp theo đối chiếu lại commit 338de81 của Vũ: bổ sung ca Tai-P-01 GenAI dưới dạng nguồn dẫn lại, giữ riêng với Tai-RAG; kế thừa hướng kết hợp C + B thành một Next Change dự kiến và chuyển các nhận định trong bảng mô phỏng thành mục cần quan sát khi test.
+Lần cập nhật tiếp theo đối chiếu lại phiên bản tài liệu chung 338de81: bổ sung ca Tai-P-01 GenAI dưới dạng nguồn dẫn lại, giữ riêng với Tai-RAG; cụ thể hóa hướng kết hợp C + B thành một Next Change dự kiến và chuyển các nhận định trong bảng mô phỏng thành mục cần quan sát khi test.
 
-Prototype A/B/C là mã kế thừa từ repo Vũ; Codex chưa sửa hoặc xác nhận toàn bộ hành vi của code trong lần tổng hợp này. Bản tổng hợp sử dụng dữ liệu problem interview Day 17; bảng hành vi tester A/B/C cần được điền từ phiên kiểm thử.
+Prototype A/B/C là bộ mã dùng chung của nhóm Tomorrow; Codex chưa sửa hoặc xác nhận toàn bộ hành vi của code trong lần tổng hợp này. Bản tổng hợp sử dụng dữ liệu problem interview Day 17; bảng hành vi tester A/B/C cần được điền từ phiên kiểm thử.
 
 Đóng góp thực tế và bài học cá nhân sau phiên kiểm thử cần do người nộp tự viết. Log này chỉ ghi những hỗ trợ AI đã diễn ra trong cuộc trao đổi.
+
