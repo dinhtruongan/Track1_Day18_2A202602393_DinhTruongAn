@@ -30,9 +30,12 @@ Cả ba dùng cùng một lỗi Cloud Run giả lập, cùng code/log và cùng 
 
 Tôi cung cấp Interview Record Day 17 của lượt HV-A01: câu chuyện buổi học Track 1, cách ghi chú, xem lại video và tra cứu. Hồ sơ này được đưa vào Evidence Snapshot để đối chiếu với notes của Vũ và Tài, cùng các giới hạn về episode, thời gian và nguyên nhân chưa rõ.
 
-Trong bản tổng hợp này, tôi sử dụng AI để đối chiếu ba Practice Notes, giữ chung bối cảnh deploy cho A/B/C và trình bày bảng Human–AI theo bốn trụ cột. Tôi yêu cầu chỉnh cách trình bày để tài liệu phản ánh công việc chung của nhóm Tomorrow, đồng thời chọn một hướng Next Change cụ thể để kiểm tra tiếp.
+Phần đóng góp của tôi trong bộ bài này được thực hiện với sự hỗ trợ của Codex:
 
-Prototype A/B/C là sản phẩm dùng chung. Phần xác định option tôi chịu trách nhiệm chính dựng và công việc hỗ trợ đồng đội chưa có thông tin phân công để điền.
+- **Trọng tâm Option C — Review bản vá:** hoàn thiện phần mô tả luồng xem diff, chỉnh sửa, duyệt hoặc bác bỏ và khôi phục mã. Đề xuất thêm lựa chọn chuyển từ C sang hướng dẫn từng bước B khi người học cần hiểu cách sửa. Bộ mã A/B/C sử dụng prototype chung của nhóm.
+- **Bối cảnh chung:** tổng hợp ba Practice Notes Day 17, nối dữ kiện về tra cứu và đối chiếu hướng dẫn với hypothesis; giữ cùng người học, task deploy, code và log mẫu cho A/B/C.
+- **Human–AI Decision Table:** tổng hợp bốn trụ cột cho cả ba option; làm rõ ở C rằng AI chỉ đề xuất bản vá, người học quyết định áp dụng và có đường sửa hoặc hoàn tác.
+- **Hỗ trợ nhóm:** đóng gói tài liệu theo sáu tệp yêu cầu, đưa prototype chung lên GitHub Pages để truy cập bằng link và thu hẹp hướng C + B thành một Next Change có thể kiểm tra.
 
 ## 5. Dữ liệu kiểm thử và bài học
 
