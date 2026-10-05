@@ -36,7 +36,7 @@ Phân công xây option và đóng góp vào bảng Human–AI chung: chưa có 
 
 - [prototype-feedback-note.md](prototype-feedback-note.md): khung ghi phiên cá nhân A–B–C và bảy hành vi cần quan sát.
 - [group-feedback-synthesis.md](group-feedback-synthesis.md): tổng hợp ba Practice Notes Day 17, các giả thuyết rút ra và ma trận chờ dữ liệu test A/B/C.
-- **Hướng chỉnh sửa cần kiểm tra:** trợ giúp ngay trong ngữ cảnh bài, kèm nguồn và bước duyệt; quyết định Next Change cuối sẽ được chốt từ hành vi test prototype.
+- **Next Change dự kiến:** thêm lựa chọn “Hướng dẫn từng bước” từ màn review diff C sang B, giữ cùng code/task. Kế thừa hướng C + B của Vũ, thu hẹp thành một thay đổi để kiểm tra; chưa coi là kết quả test.
 - **Still Unproven:** hoàn thành nhiệm vụ, khả năng phát hiện bản vá sai, nhu cầu dùng lại, hiệu quả học và retention đều chưa được xác minh bằng tester thực tế.
 
 ## 6. AI Support Log

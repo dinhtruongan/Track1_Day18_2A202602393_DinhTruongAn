@@ -38,7 +38,22 @@ Repo nguồn của Vũ có một bảng được ghi là “Simulated Field Test
 
 **Hướng kiểm tra xuất phát từ Day 17:** cho người học xem hướng dẫn và nguồn ngay trong ngữ cảnh task, giảm công ghép tài liệu, giữ quyền duyệt.
 
-**Quyết định Next Change sau A/B/C:** chờ chọn đúng một thay đổi dựa trên event/quote test. Một ứng viên thiết kế là đường chuyển từ review diff C sang hướng dẫn B; đây là đề xuất cần kiểm tra, chưa phải kết quả được tester xác nhận.
+**Next Change chọn cho vòng thiết kế tiếp theo:** thêm một lựa chọn “Hướng dẫn từng bước” ngay tại màn review diff của C, chuyển sang luồng B và giữ nguyên code/task hiện tại. Người học có thể chọn xem bản vá nhanh hoặc hiểu từng bước trước khi duyệt.
+
+Quyết định này kế thừa hướng kết hợp C + B trong [bản tổng hợp của Vũ](https://github.com/elysszxje/Track1_Day19_2A202602695_TranPhamThaiVu/blob/338de81e5b4fd0bbd9ee485593db036b905b5c72/group-feedback-synthesis.md), thu hẹp thành đúng một thay đổi có thể kiểm tra. Day 17 cho thấy nhu cầu tìm hướng dẫn và đối chiếu; chưa cho biết người học thích luồng nhanh hay luồng từng bước. Đây là quyết định thiết kế dự kiến, chưa phải kết luận từ ba phiên test thực tế.
+
+**Tiêu chí kiểm tra:** quan sát người học có tự tìm được đường chuyển C → B khi chưa hiểu diff, có tiếp tục cùng task mà không cần người điều phối chỉ dẫn, và có giải thích được lý do sửa PORT/host sau khi hoàn thành hay không. Giữ A làm phương án đối chiếu; chưa loại A chỉ dựa trên dữ liệu mô phỏng.
+
+### Các tín hiệu tham khảo từ bảng mô phỏng của Vũ
+
+| Nội dung repo Vũ nêu | Cách dùng trong vòng tiếp theo |
+|---|---|
+| B tạo cảm giác kiểm soát nhờ duyệt từng bước | Quan sát hành vi duyệt/sửa/skip; hỏi lý do, không mặc định B thắng |
+| C hấp dẫn vì nhanh nhưng bản vá sai cần recovery | Đưa cùng một tình huống đề xuất sai vào test và ghi reject/customize/rollback |
+| A có thể tốn công tự tổng hợp | So sánh thao tác và mức hiểu trên cùng task, giữ A làm đối chứng |
+| Thứ tự trải nghiệm có thể ảnh hưởng lựa chọn | Xoay vòng A–B–C, B–C–A, C–A–B; ghi nhận ảnh hưởng học lại |
+
+Các nội dung này là tín hiệu từ bộ mô phỏng được repo nguồn công bố, không chuyển thành số đo, quote hay kết quả phiên cá nhân của An.
 
 ## 6. Still Unproven
 

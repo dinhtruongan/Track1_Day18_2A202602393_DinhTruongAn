@@ -14,6 +14,12 @@ Thiết kế kế thừa từ [Vũ, commit 338de81](https://github.com/elysszxje
 
 **Ẩn số:** họ đổi nguồn vì hướng dẫn sai, thiếu ngữ cảnh, chưa biết quy trình hay chỉ đang kiểm tra thông thường? Công sức có đủ lớn để đáng giải? Hướng dẫn sẵn có đã đủ tốt chưa?
 
+### Bổ sung từ Evidence Snapshot của Vũ
+
+[Design sheet của Vũ](https://github.com/elysszxje/Track1_Day19_2A202602695_TranPhamThaiVu/blob/338de81e5b4fd0bbd9ee485593db036b905b5c72/three-option-design-sheet.md) còn mô tả ca `Tai-P-01`: người học xem video GenAI/Deep Learning, chụp slide, lưu Notion rồi gửi ChatGPT. Theo bản tổng hợp đó, người học nhận xét câu trả lời chỉ theo slide, thiếu mạch video. Đây là dữ kiện được dẫn lại từ repo Vũ, khác ca Tai-RAG đã cung cấp trước đó; không cộng hai ca thành hai người tham gia độc lập hoặc gộp thời lượng của chúng.
+
+Ca này bổ sung một cách giải thích cho barrier: trợ giúp có thể thiếu ngữ cảnh của toàn bài. Mong muốn có recap video được giữ trong Solution Parking Lot, chưa dùng để kết luận người học cần một feature cụ thể. Transcript được repo nguồn dẫn qua thư mục đồng cấp chưa có trong bộ bài này.
+
 ### Kế thừa Solution Parking Lot
 
 | Hướng Day 17 | Cách dùng khi phân kỳ A/B/C |

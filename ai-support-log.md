@@ -19,6 +19,8 @@ Codex: đọc repo của Vũ và yêu cầu VLearn, đối chiếu với ba Prac
 
 ## Ranh giới công việc
 
+Lần cập nhật tiếp theo đối chiếu lại commit 338de81 của Vũ: bổ sung ca Tai-P-01 GenAI dưới dạng nguồn dẫn lại, giữ riêng với Tai-RAG; kế thừa hướng kết hợp C + B thành một Next Change dự kiến và chuyển các nhận định trong bảng mô phỏng thành mục cần quan sát khi test.
+
 Prototype A/B/C là mã kế thừa từ repo Vũ; Codex chưa sửa hoặc xác nhận toàn bộ hành vi của code trong lần tổng hợp này. Bản tổng hợp sử dụng dữ liệu problem interview Day 17; bảng hành vi tester A/B/C cần được điền từ phiên kiểm thử.
 
 Đóng góp thực tế và bài học cá nhân sau phiên kiểm thử cần do người nộp tự viết. Log này chỉ ghi những hỗ trợ AI đã diễn ra trong cuộc trao đổi.
