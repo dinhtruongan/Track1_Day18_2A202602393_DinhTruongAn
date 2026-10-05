@@ -30,7 +30,9 @@ Cả ba dùng cùng một lỗi Cloud Run giả lập, cùng code/log và cùng 
 
 Tôi cung cấp Interview Record Day 17 của lượt HV-A01: câu chuyện buổi học Track 1, cách ghi chú, xem lại video và tra cứu. Hồ sơ này được đưa vào Evidence Snapshot để đối chiếu với notes của Vũ và Tài, cùng các giới hạn về episode, thời gian và nguyên nhân chưa rõ.
 
-Phân công xây option và đóng góp vào bảng Human–AI chung: chưa có thông tin cụ thể để điền. Bộ mã A/B/C là prototype dùng chung của nhóm Tomorrow.
+Trong bản tổng hợp này, tôi sử dụng AI để đối chiếu ba Practice Notes, giữ chung bối cảnh deploy cho A/B/C và trình bày bảng Human–AI theo bốn trụ cột. Tôi yêu cầu chỉnh cách trình bày để tài liệu phản ánh công việc chung của nhóm Tomorrow, đồng thời chọn một hướng Next Change cụ thể để kiểm tra tiếp.
+
+Prototype A/B/C là sản phẩm dùng chung. Phần xác định option tôi chịu trách nhiệm chính dựng và công việc hỗ trợ đồng đội chưa có thông tin phân công để điền.
 
 ## 5. Dữ liệu kiểm thử và bài học
 
@@ -49,8 +51,8 @@ Codex đọc repo nguồn, đối chiếu VLearn, tổng hợp ba notes Day 17 v
 |---|---|
 | Evidence Continuity | Có nguồn Day 17 và hypothesis năm thành tố; hậu quả vẫn là giả thuyết |
 | Meaningful Options | Có ba cơ chế khác nhau trên cùng task |
-| Human Control | Có design pass cho expectation, agency, evidence, recovery |
-| Test-ready | Đã cấu hình GitHub Pages công khai cho prototype A/B/C; chưa có dữ liệu thao tác của tester |
+| Human Control | Bảng thiết kế đủ bốn trụ cột; mã prototype có các điều khiển duyệt, sửa, dừng và phục hồi |
+| Test-ready | Link công khai hoạt động; A/B/C dùng chung task và dữ liệu mẫu. Chưa xác minh khả năng tự hoàn thành của người dùng ngoài nhóm |
 | Learning, Not Praise | Có tổng hợp Day 17; ma trận feedback A/B/C chờ ba phiên kiểm thử |
 
 

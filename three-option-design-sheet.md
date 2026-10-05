@@ -14,6 +14,8 @@ Tài liệu thiết kế chung của nhóm Tomorrow: Đinh Trường An, Trần 
 
 **Ẩn số:** họ đổi nguồn vì hướng dẫn sai, thiếu ngữ cảnh, chưa biết quy trình hay chỉ đang kiểm tra thông thường? Công sức có đủ lớn để đáng giải? Hướng dẫn sẵn có đã đủ tốt chưa?
 
+**Điều có thể làm giả thuyết yếu đi:** người học hoàn thành và giải thích được bài bằng tài liệu hiện có với ít công sức; việc đối chiếu nhiều nguồn là lựa chọn học chủ động, không gây gián đoạn đáng kể; hoặc khó khăn chủ yếu do thiếu kiến thức tiên quyết thay vì thiếu ngữ cảnh trợ giúp.
+
 ### Bối cảnh bổ sung: tự học video GenAI
 
 Evidence Snapshot chung còn mô tả ca `Tai-P-01`: người học xem video GenAI/Deep Learning, chụp slide, lưu Notion rồi gửi ChatGPT. Theo bản tổng hợp đó, người học nhận xét câu trả lời chỉ theo slide, thiếu mạch video. Đây là dữ kiện được dẫn lại từ tài liệu chung, khác ca Tai-RAG đã cung cấp trước đó; không cộng hai ca thành hai người tham gia độc lập hoặc gộp thời lượng của chúng.
