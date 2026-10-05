@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VLearn Lab Day 18–19: Micro-Prototypes Human–AI Interaction</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Top Banner / Navigation -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="branding">
+        <span class="badge-vlearn">VLearn Codelab · K4 Track 1</span>
+        <h1>Lab Day 18–19: Thử Nghiệm Tương Tác Human–AI</h1>
+        <p class="subtitle">Bài tập chung Day 12 · Case A: AI Tutor: Diagnostic Refresher · Nhóm <strong>Tomorrow</strong> (Trần Phạm Thái Vũ - 2A202602695)</p>
+      </div>
+      <div class="header-actions">
+        <button id="toggle-observer-btn" class="btn btn-secondary" aria-expanded="false" aria-controls="observer-drawer">
+          <span class="icon">📋</span> Bảng Quan Sát Tester
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Observer Drawer (Offcanvas / Slide-out panel for test facilitators) -->
+  <aside id="observer-drawer" class="observer-drawer hidden" tabindex="-1" aria-label="Bảng ghi chú dành cho người quan sát">
+    <div class="drawer-header">
+      <h2>📋 Bảng Hướng Dẫn & Ghi Chú Người Quan Sát (Facilitator)</h2>
+      <button id="close-observer-btn" class="btn-icon" aria-label="Đóng bảng quan sát">&times;</button>
+    </div>
+    <div class="drawer-content">
+      <div class="notice-box info">
+        <strong>Mục đích:</strong> Dành cho người điều phối phiên kiểm thử (Trần Phạm Thái Vũ). Tuyệt đối <em>không giải thích trước</em> tính năng hay mớm nút bấm cho người tham gia.
+      </div>
+      
+      <section class="drawer-section">
+        <h3>1. Lệnh Tác Vụ Trung Tính (Outcome Task)</h3>
+        <p class="quote">“Bạn đang làm bài tập chung Day 12 về deploy microservice Node.js lên Cloud Run nhưng gặp thông báo lỗi trong terminal. Hãy dùng thử các công cụ trên màn hình để tìm ra nguyên nhân, chọn phương án giải quyết và kiểm chứng kết quả trong prototype.”</p>
+      </section>
+
+      <section class="drawer-section">
+        <h3>2. Ba Câu Cứu Hộ Trung Tính (Neutral Rescue Prompts)</h3>
+        <ul>
+          <li><em>Cứu hộ 1 (khi kẹt >30s):</em> “Bạn đang dự định làm gì tiếp theo?”</li>
+          <li><em>Cứu hộ 2 (khi bối rối):</em> “Trên màn hình hiện tại có thông tin nào khiến bạn chú ý không?”</li>
+          <li><em>Cứu hộ 3 (khi nghi ngờ):</em> “Nếu gặp tình huống này ở ngoài thực tế, bạn sẽ làm gì?”</li>
+        </ul>
+      </section>
+
+      <section class="drawer-section">
+        <h3>3. Điểm Cần Quan Sát (What to watch for)</h3>
+        <ul>
+          <li>Tester có đọc error log trong terminal trước khi bấm không?</li>
+          <li>Tester bấm nút nào đầu tiên ở từng Option?</li>
+          <li>Tester có chú ý hoặc bấm vào trích dẫn Official Docs không?</li>
+          <li>Khi AI gợi ý chưa đúng, tester có tìm thấy nút Rollback / Bác bỏ / Chỉnh sửa không?</li>
+        </ul>
+      </section>
+
+      <section class="drawer-section">
+        <h3>4. Ghi Chú Tức Thời (Observer Scratchpad)</h3>
+        <label for="observer-scratchpad" class="caption" style="display:block; margin-bottom:0.4rem;">
+          Ghi chú nhanh các biểu hiện lưỡng lự, nhầm lẫn để điền vào <code>prototype-feedback-note.md</code>:
+        </label>
+        <textarea id="observer-scratchpad" placeholder="Ghi nhận thao tác, câu nói nguyên văn của tester tại đây (dữ liệu lưu cục bộ trong bộ nhớ phiên)..." rows="6"></textarea>
+      </section>
+    </div>
+  </aside>
+
+  <!-- Main Content Layout -->
+  <main class="main-container">
+    
+    <!-- Context Box (70% Common Context across A/B/C) -->
+    <section class="common-context-panel" aria-label="Bối cảnh bài tập chung">
+      <div class="context-header">
+        <div class="task-badge">BỐI CẢNH DÙNG CHUNG (FIXED SCOPE)</div>
+        <div class="fixture-label">Giáo cụ sư phạm tổng hợp (Synthesized Teaching Fixture)</div>
+      </div>
+
+      <div class="context-body">
+        <div class="context-meta">
+          <h2>Bài tập chung Day 12: Đóng gói & Deploy Node.js Microservice lên Cloud Run</h2>
+          <p class="context-desc">
+            <strong>Mục tiêu:</strong> Khởi chạy container microservice trên Google Cloud Run. Hợp đồng container của Google Cloud Run yêu cầu container phải khởi động và lắng nghe lưu lượng HTTP trên tất cả địa chỉ mạng <code>0.0.0.0</code> tại cổng được cung cấp qua biến môi trường <code>PORT</code>.
+          </p>
+        </div>
+
+        <!-- Split View: Terminal Logs & Source Code Fixture -->
+        <div class="fixture-grid">
+          <!-- Terminal Fixture -->
+          <div class="terminal-card">
+            <div class="terminal-top">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+              <span class="terminal-title">cloud-run-deploy.log (Build & Deploy Output)</span>
+            </div>
+            <pre class="terminal-body" id="terminal-content"><code>[INFO] Deploying container image to Cloud Run service [microservice-payment]...
+[INFO] Container starting up...
+[ERROR] Error: Environment variable PORT is not set or invalid. Container failed to start listening on port 8080.
+[ERROR] Container failed to start and then terminated with exit code 1.
+[FATAL] Cloud Run error: Container failed to start. Review container logs for details.
+Container listening port not detected on 0.0.0.0. Health check timed out after 240 seconds.</code></pre>
+          </div>
+
+          <!-- Code Editor Fixture -->
+          <div class="editor-card">
+            <div class="editor-top">
+              <span class="editor-file">📄 server.js (Current Source Code)</span>
+              <span class="editor-status" id="editor-status-indicator">Option A - Mã nguồn ban đầu (chưa sửa)</span>
+            </div>
+            <div class="editor-body">
+              <label for="code-editor-input" class="sr-only">Nội dung tệp server.js</label>
+              <textarea id="code-editor-input" spellcheck="false" rows="11" aria-label="Mã nguồn server.js"></textarea>
+            </div>
+            <div class="editor-footer">
+              <div class="editor-actions">
+                <button id="validate-code-btn" class="btn btn-sm btn-primary">Chạy thử Deploy (Simulated Fixture Check)</button>
+                <button id="reset-code-btn" class="btn btn-sm btn-outline">Khôi phục mã nguồn ban đầu</button>
+              </div>
+              <div id="deploy-result-message" class="deploy-message hidden" role="status" aria-live="polite"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Spectrum of Agency Tab Switcher -->
+    <nav class="options-nav" aria-label="Chọn Option thử nghiệm tương tác Human-AI">
+      <div class="nav-intro">
+        <span class="nav-label">CHỌN PHƯƠNG ÁN TƯƠNG TÁC (3 SPECTRUMS OF AGENCY):</span>
+      </div>
+      <div class="tabs-list" role="tablist">
+        <button role="tab" id="tab-opt-a" aria-selected="true" aria-controls="panel-opt-a" class="tab-btn active">
+          <span class="tab-opt-badge">Option A</span>
+          <span class="tab-title">User-Initiated Checklist & Search</span>
+          <span class="tab-agency">High User Agency (~85%)</span>
+        </button>
+        <button role="tab" id="tab-opt-b" aria-selected="false" aria-controls="panel-opt-b" class="tab-btn">
+          <span class="tab-opt-badge">Option B</span>
+          <span class="tab-title">Co-Created Socratic Navigator</span>
+          <span class="tab-agency">Balanced Agency (~50/50)</span>
+        </button>
+        <button role="tab" id="tab-opt-c" aria-selected="false" aria-controls="panel-opt-c" class="tab-btn">
+          <span class="tab-opt-badge">Option C</span>
+          <span class="tab-title">Proactive AI Diagnostic & Auto-Fix</span>
+          <span class="tab-agency">High AI Automation (~80%)</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- OPTION A PANEL -->
+    <section id="panel-opt-a" class="option-panel active" role="tabpanel" aria-labelledby="tab-opt-a">
+      <div class="panel-header">
+        <div class="panel-meta">
+          <h2>Option A: Danh Sách Kiểm Tra Chủ Động & Tra Cứu Ngữ Cảnh Có Trích Dẫn</h2>
+          <p class="panel-desc">
+            <em>Cơ chế:</em> Người học chủ động kích hoạt hỗ trợ. Hệ thống hiển thị 3 mục kiểm tra then chốt kèm tài liệu chính thức của Cloud Run và công cụ tra cứu ngữ cảnh đối chiếu tài liệu. AI chỉ phản hồi khi được hỏi cụ thể.
+          </p>
+        </div>
+        <div class="agency-tag high-user">Vị trí thiết kế: Người dùng chủ động (~85%)</div>
+      </div>
+
+      <div class="opt-a-content">
+        <!-- Action Trigger -->
+        <div class="action-bar">
+          <button id="opt-a-trigger-btn" class="btn btn-primary">
+            🔍 Mở Checklist Kiểm Tra Lỗi Cloud Run (User-Initiated)
+          </button>
+          <button id="opt-a-reset-btn" class="btn btn-outline">Làm mới Checklist & Tra cứu</button>
+        </div>
+
+        <!-- Checklist Container -->
+        <div id="opt-a-checklist-box" class="checklist-container hidden">
+          <h3 class="section-title">Danh Mục 3 Điểm Kiểm Tra Khuyến Nghị (Kèm Trích Dẫn Chuẩn):</h3>
+          
+          <div class="checklist-item" id="check-item-1">
+            <input type="checkbox" id="chk-port" class="checklist-checkbox">
+            <div class="checklist-details">
+              <label for="chk-port" class="chk-label">
+                <strong>1. Đọc cổng từ biến môi trường <code>PORT</code> thay vì giá trị cố định (hardcoded)</strong>
+              </label>
+              <p class="chk-desc">
+                Cloud Run tự động tiêm biến <code>PORT</code> (mặc định 8080) vào container. Ứng dụng phải đọc biến này qua <code>process.env.PORT || 8080</code> thay vì gắn cứng cổng 3000.
+              </p>
+              <div class="citation-tag">
+                📖 Nguồn tài liệu: <a href="https://docs.cloud.google.com/run/docs/configuring/services/containers" target="_blank" rel="noopener">Google Cloud Run: Configuring Container Services</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="checklist-item" id="check-item-2">
+            <input type="checkbox" id="chk-host" class="checklist-checkbox">
+            <div class="checklist-details">
+              <label for="chk-host" class="chk-label">
+                <strong>2. Lắng nghe trên tất cả giao diện mạng <code>0.0.0.0</code> thay vì <code>localhost / 127.0.0.1</code></strong>
+              </label>
+              <p class="chk-desc">
+                Nếu bind vào <code>localhost</code>, chỉ nội bộ container mới kết nối được. Router ngoài của Cloud Run không thể gửi request kiểm tra sức khỏe. Container bắt buộc phải lắng nghe trên <code>0.0.0.0</code>.
+              </p>
+              <div class="citation-tag">
+                📖 Nguồn tài liệu: <a href="https://docs.cloud.google.com/run/docs/container-contract#port" target="_blank" rel="noopener">Cloud Run Container Contract - Ingress & Port Listening</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="checklist-item" id="check-item-3">
+            <input type="checkbox" id="chk-dockerfile" class="checklist-checkbox">
+            <div class="checklist-details">
+              <label for="chk-dockerfile" class="chk-label">
+                <strong>3. Hiểu đúng vai trò của chỉ thị <code>EXPOSE</code> và <code>ENV</code> trong Dockerfile</strong>
+              </label>
+              <p class="chk-desc">
+                Chỉ thị <code>EXPOSE</code> trong Dockerfile chỉ mang tính tài liệu hóa (metadata). Đổi <code>EXPOSE 8080</code> sẽ không có tác dụng nếu mã nguồn <code>server.js</code> vẫn đang lắng nghe ở cổng khác hoặc bind localhost!
+              </p>
+              <div class="citation-tag">
+                📖 Nguồn tài liệu: <a href="https://docs.docker.com/reference/dockerfile/#expose" target="_blank" rel="noopener">Docker Documentation - EXPOSE Specification</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Canned Contextual Search Tool -->
+        <div class="canned-search-box">
+          <h3 class="section-title">Hộp Tra Cứu Tài Liệu Ngữ Cảnh Có Trích Dẫn:</h3>
+          <p class="caption">Nhập từ khóa cần tra cứu (thử nghiệm: <code>PORT</code>, <code>localhost</code>, <code>0.0.0.0</code>, <code>Dockerfile</code>):</p>
+          <div class="search-input-group">
+            <input type="text" id="opt-a-search-input" placeholder="Nhập từ khóa tra cứu (vd: PORT, localhost, 0.0.0.0)..." aria-label="Ô tra cứu tài liệu">
+            <button id="opt-a-search-btn" class="btn btn-secondary">Tra Cứu</button>
+          </div>
+          <div id="opt-a-search-results" class="search-results-area" role="region" aria-live="polite">
+            <p class="empty-state">Chưa có truy vấn nào. Hãy nhập từ khóa hoặc bấm vào checklist để tra cứu.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OPTION B PANEL -->
+    <section id="panel-opt-b" class="option-panel" role="tabpanel" aria-labelledby="tab-opt-b">
+      <div class="panel-header">
+        <div class="panel-meta">
+          <h2>Option B: Đồng Hành Dẫn Dắt Socratic Từng Bước (Co-Created Navigator)</h2>
+          <p class="panel-desc">
+            <em>Cơ chế:</em> Người học yêu cầu trợ giúp. AI đặt 1 câu hỏi chẩn đoán để xác định trạng thái nhận thức, sau đó cùng người học thực hiện 3 bước vi mô. Người học có quyền xác nhận, chỉnh sửa, bỏ qua, quay lại, dừng lại hoặc chuyển hướng giải quyết.
+          </p>
+        </div>
+        <div class="agency-tag balanced">Vị trí thiết kế: Đồng kiến tạo (~50/50)</div>
+      </div>
+
+      <div class="opt-b-content">
+        <!-- Step 0: Trigger Button -->
+        <div id="opt-b-trigger-container" class="action-bar">
+          <button id="opt-b-start-btn" class="btn btn-primary">
+            🤝 Tôi Cần Hướng Dẫn Từng Bước (Kích hoạt Socratic Navigator)
+          </button>
+        </div>
+
+        <!-- Stopped Notice View (Visible when user stops guidance) -->
+        <div id="opt-b-stopped-box" class="notice-box info hidden" role="status" aria-live="polite">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+            <div>
+              <strong>⏸️ Hướng dẫn từng bước đã tạm dừng:</strong>
+              <p style="margin:0.2rem 0 0; font-size:0.88rem;">Các nút thao tác đã bị khóa để tránh can thiệp ngoài ý muốn. Mã nguồn chưa xác nhận sẽ không bị áp dụng.</p>
+            </div>
+            <div style="display:flex; gap:0.5rem;">
+              <button id="opt-b-resume-btn" class="btn btn-primary btn-sm">Tiếp tục bước hiện tại</button>
+              <button id="opt-b-restart-btn" class="btn btn-outline btn-sm">Khởi động lại từ đầu</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 1: Diagnostic Question -->
+        <div id="opt-b-diagnostic-box" class="conversation-card hidden">
+          <div class="ai-avatar-header">
+            <span class="ai-avatar">🤖</span>
+            <div>
+              <strong>AI Tutor (Hỏi chẩn đoán trước khi gợi ý):</strong>
+              <p>Chào bạn, container bị dừng ngay sau khi khởi chạy. Hãy cùng xác định trạng thái qua câu hỏi ngắn sau:</p>
+            </div>
+          </div>
+          <div class="diagnostic-question">
+            <p class="question-text"><em>“Trong tệp <code>server.js</code> của bạn, dòng lệnh khởi động server đang lắng nghe cổng nào và địa chỉ mạng nào?”</em></p>
+            <div class="diagnostic-options">
+              <label class="diag-option">
+                <input type="radio" name="diag-answer" value="hardcode-3000">
+                <span>Đang gắn cứng cổng <code>3000</code> và địa chỉ <code>localhost</code>.</span>
+              </label>
+              <label class="diag-option">
+                <input type="radio" name="diag-answer" value="env-port">
+                <span>Đã đọc <code>process.env.PORT</code> nhưng vẫn bind <code>localhost</code>.</span>
+              </label>
+              <label class="diag-option">
+                <input type="radio" name="diag-answer" value="unsure">
+                <span>Tôi chưa rõ đoạn code này có tác động gì đến Cloud Run.</span>
+              </label>
+            </div>
+            <button id="opt-b-submit-diag-btn" class="btn btn-secondary mt-2">Gửi câu trả lời để nhận lộ trình 3 bước</button>
+          </div>
+        </div>
+
+        <!-- Diagnostic Feedback Card (Changes explanation based on answer) -->
+        <div id="opt-b-diag-feedback" class="notice-box info hidden" role="region" aria-live="polite"></div>
+
+        <!-- Step 2: 3 Micro-steps Navigator -->
+        <div id="opt-b-microsteps-box" class="microsteps-container hidden">
+          <div class="steps-progress-bar">
+            <span class="progress-step active" id="prog-step-1">Bước 1: Cổng động</span>
+            <span class="progress-step" id="prog-step-2">Bước 2: Host 0.0.0.0</span>
+            <span class="progress-step" id="prog-step-3">Bước 3: Đối chiếu Docker</span>
+          </div>
+
+          <!-- Micro-step 1 -->
+          <div class="microstep-card" id="microstep-card-1" tabindex="-1">
+            <div class="step-badge">BƯỚC 1 / 3</div>
+            <h3>Cấu hình Cổng Động từ Biến Môi Trường (PORT)</h3>
+            <p class="step-explanation">
+              Cloud Run truyền cổng qua biến môi trường <code>PORT</code>. Ta cần đổi khai báo cổng cố định thành <code>const PORT = process.env.PORT || 8080;</code> để ứng dụng thích ứng với môi trường Cloud Run lẫn chạy thử local.
+            </p>
+            <div class="step-code-preview">
+              <label for="step1-code-edit" class="code-label">Đoạn mã đề xuất cho Bước 1 (Có thể chỉnh sửa):</label>
+              <textarea id="step1-code-edit" rows="2" class="step-code-input">const PORT = process.env.PORT || 8080;</textarea>
+            </div>
+            <div class="citation-tag">
+              📖 Dẫn chứng: <a href="https://docs.cloud.google.com/run/docs/configuring/services/containers" target="_blank" rel="noopener">Cloud Run Docs: Configuring Container Port</a>
+            </div>
+            <div id="step1-error-msg" class="step-error hidden" role="alert"></div>
+            <div class="step-controls">
+              <button id="step1-confirm-btn" class="btn btn-primary btn-sm">Xác nhận áp dụng bước này</button>
+              <button id="step1-skip-btn" class="btn btn-outline btn-sm">Bỏ qua (Skip - Không tính hoàn thành)</button>
+              <button id="step1-stop-btn" class="btn btn-danger-outline btn-sm">Dừng hướng dẫn</button>
+            </div>
+          </div>
+
+          <!-- Micro-step 2 -->
+          <div class="microstep-card hidden" id="microstep-card-2" tabindex="-1">
+            <div class="step-badge">BƯỚC 2 / 3</div>
+            <h3>Lắng nghe trên Địa Chỉ Mạng Mở <code>0.0.0.0</code></h3>
+            <p class="step-explanation">
+              Mặc định <code>localhost</code> chỉ nhận kết nối nội bộ. Cloud Run yêu cầu ứng dụng phải bind vào <code>0.0.0.0</code> để bộ điều hướng bên ngoài gửi được lưu lượng vào container.
+            </p>
+            <div class="step-code-preview">
+              <label for="step2-code-edit" class="code-label">Đoạn mã đề xuất cho Bước 2 (Có thể chỉnh sửa):</label>
+              <textarea id="step2-code-edit" rows="3" class="step-code-input">app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on port ${PORT}`);
+});</textarea>
+            </div>
+            <div class="citation-tag">
+              📖 Dẫn chứng: <a href="https://docs.cloud.google.com/run/docs/container-contract#port" target="_blank" rel="noopener">Cloud Run Container Contract: Listening on 0.0.0.0</a>
+            </div>
+            <div id="step2-error-msg" class="step-error hidden" role="alert"></div>
+            <div class="step-controls">
+              <button id="step2-back-btn" class="btn btn-outline btn-sm">Quay lại Bước 1</button>
+              <button id="step2-confirm-btn" class="btn btn-primary btn-sm">Xác nhận áp dụng bước này</button>
+              <button id="step2-skip-btn" class="btn btn-outline btn-sm">Bỏ qua (Skip)</button>
+              <button id="step2-stop-btn" class="btn btn-danger-outline btn-sm">Dừng hướng dẫn</button>
+            </div>
+          </div>
+
+          <!-- Micro-step 3 -->
+          <div class="microstep-card hidden" id="microstep-card-3" tabindex="-1">
+            <div class="step-badge">BƯỚC 3 / 3</div>
+            <h3>Hiểu đúng Mối Quan Hệ Giữa Dockerfile và Mã Nguồn</h3>
+            <p class="step-explanation">
+              Nếu Dockerfile có lệnh <code>ENV PORT=8080</code>, đó là giá trị dự phòng cục bộ khi test Docker local. Khi chạy trên Cloud Run thật, nền tảng luôn ghi đè giá trị này. Do đó mấu chốt kỹ thuật nằm ở việc mã nguồn <code>server.js</code> phải đọc giá trị này!
+            </p>
+            
+            <!-- Alternate Interaction Sub-Panel -->
+            <div id="opt-b-alt-panel" class="notice-box info hidden">
+              <strong>Khảo sát Dockerfile & Hướng dẫn Local Test:</strong>
+              <p style="margin:0.2rem 0; font-size:0.85rem;">Khi kiểm thử container cục bộ trước khi đẩy lên Cloud Run, bạn có thể chạy lệnh:</p>
+              <pre style="background:#0f172a; color:#e2e8f0; padding:0.4rem; border-radius:4px; font-size:0.8rem; margin:0.3rem 0;"><code>docker run -p 8080:8080 -e PORT=8080 my-image</code></pre>
+              <p style="margin:0.2rem 0; font-size:0.85rem;">Bạn cũng có thể chuyển sang <button id="opt-b-nav-to-a-btn" class="btn btn-sm btn-secondary" style="padding:0.1rem 0.4rem;">Option A (Checklist)</button> để đối chiếu tài liệu độc lập.</p>
+            </div>
+
+            <div class="step-controls">
+              <button id="step3-back-btn" class="btn btn-outline btn-sm">Quay lại Bước 2</button>
+              <button id="step3-confirm-btn" class="btn btn-primary btn-sm">Hoàn thành quy trình dẫn dắt</button>
+              <button id="step3-alt-btn" class="btn btn-secondary btn-sm">Xem hướng giải khác (Khảo sát Dockerfile)</button>
+              <button id="step3-stop-btn" class="btn btn-danger-outline btn-sm">Dừng hướng dẫn</button>
+            </div>
+          </div>
+
+          <!-- Microsteps Completion Summary -->
+          <div id="microsteps-complete-box" class="completion-box hidden" tabindex="-1">
+            <div class="completion-status-icon">📋</div>
+            <h3 id="completion-summary-title">Kết Quả Quy Trình Dẫn Dắt Từng Bước</h3>
+            <p id="completion-summary-desc" style="font-size:0.9rem; margin-bottom:0.8rem;"></p>
+            <div id="completion-steps-list" style="margin-bottom:1rem; text-align:left; background:#ffffff; padding:0.8rem; border-radius:6px; border:1px solid #cbd5e1;"></div>
+            <button id="opt-b-reset-steps-btn" class="btn btn-outline mt-2">Thực hiện lại hướng dẫn từ đầu</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OPTION C PANEL -->
+    <section id="panel-opt-c" class="option-panel" role="tabpanel" aria-labelledby="tab-opt-c">
+      <div class="panel-header">
+        <div class="panel-meta">
+          <h2>Option C: Tự Động Chẩn Đoán & Đề Xuất Bản Vá (Proactive AI Auto-Fix)</h2>
+          <p class="panel-desc">
+            <em>Cơ chế:</em> Hệ thống tự động phân tích error log ngay khi có lỗi, chủ động đưa ra một giải pháp sửa lỗi hoàn chỉnh kèm bản xem trước khác biệt mã nguồn (Diff Preview) và độ tin cậy mô phỏng. Người học giữ vai trò người duyệt (Reviewer).
+          </p>
+        </div>
+        <div class="agency-tag high-ai">Vị trí thiết kế: Tự động hóa cao (~80%)</div>
+      </div>
+
+      <div class="opt-c-content">
+        <!-- Proactive Banner with Simulated Confidence -->
+        <div class="proactive-banner" id="opt-c-proactive-banner">
+          <div class="banner-top">
+            <span class="ai-pulse-icon">⚡</span>
+            <div class="banner-title">
+              <h3>AI Đã Tự Động Phân Tích Error Log và Chuẩn Bị Bản Vá</h3>
+              <p>Phát hiện 2 điểm bất thường: Cổng lắng nghe hardcoded 3000 & Hostname giới hạn localhost.</p>
+            </div>
+            <div class="confidence-badge" id="opt-c-confidence-badge" title="Lưu ý: Đây là chỉ số mô phỏng giả lập trong prototype, không phải độ tin cậy được đo lường thống kê thực tế">
+              Độ tin cậy mô phỏng: <strong id="confidence-val">92%</strong>
+              <span class="simulated-flag">(Giá trị minh họa UX)</span>
+            </div>
+          </div>
+          
+          <div class="uncertainty-notice">
+            <small>⚠️ <em>Tính minh bạch AI:</em> Điểm tin cậy 92% là giá trị mô phỏng phục vụ kịch bản sư phạm, không phải độ tin cậy đo lường thống kê. Luôn đối chiếu bản vá với tài liệu trước khi duyệt.</small>
+          </div>
+        </div>
+
+        <!-- Testing Known-Wrong / Uncertain Recovery Interaction -->
+        <div class="recovery-testing-box">
+          <div class="recovery-header">
+            <span class="lab-icon">🧪</span>
+            <strong>Thử Nghiệm Phục Hồi Khi AI Gợi Ý Sai Hoặc Không Chắc Chắn:</strong>
+          </div>
+          <p class="caption">Để kiểm tra phản xạ và lối thoát của người dùng khi AI đưa ra chẩn đoán sai/không chắc chắn, hãy bấm nút dưới đây:</p>
+          <button id="toggle-uncertain-btn" class="btn btn-sm btn-warning">
+            Kích hoạt tình huống: AI Gợi ý sai (Chỉ sửa Dockerfile EXPOSE, bỏ quên server.js)
+          </button>
+        </div>
+
+        <!-- Rejected Proposal Notice (Visible when user clicks Reject) -->
+        <div id="opt-c-rejected-notice" class="notice-box warning hidden" role="alert">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+            <span>❌ <strong>Đã bác bỏ bản vá của AI:</strong> Bản vá hiện bị khóa để bảo vệ mã nguồn. Tệp <code>server.js</code> không bị thay đổi.</span>
+            <button id="opt-c-unreject-btn" class="btn btn-sm btn-secondary">Khôi phục đề xuất</button>
+          </div>
+        </div>
+
+        <!-- Diff Preview Card -->
+        <div class="diff-card" id="opt-c-diff-card">
+          <div class="diff-card-header">
+            <span>Bản Xem Trước Khác Biệt Mã Nguồn (Code Diff Preview)</span>
+            <span id="diff-scenario-label" class="scenario-label normal">Kịch bản: Bản vá chuẩn (Độ tin cậy mô phỏng: 92%)</span>
+          </div>
+
+          <div class="diff-view" id="diff-view-content">
+            <div class="diff-line remove"><span>- const PORT = 3000;</span></div>
+            <div class="diff-line add"><span>+ const PORT = process.env.PORT || 8080;</span></div>
+            <div class="diff-line remove"><span>- app.listen(PORT, 'localhost', () => {</span></div>
+            <div class="diff-line add"><span>+ app.listen(PORT, '0.0.0.0', () => {</span></div>
+            <div class="diff-line normal"><span>    console.log(`Server running on port ${PORT}`);</span></div>
+            <div class="diff-line normal"><span>  });</span></div>
+          </div>
+
+          <div class="diff-citations">
+            📖 Nguồn đối chiếu: <a href="https://docs.cloud.google.com/run/docs/container-contract#port" target="_blank" rel="noopener">Google Cloud Run Documentation: Container Contract</a>
+          </div>
+        </div>
+
+        <!-- Control & Recovery Action Bar -->
+        <div class="opt-c-controls">
+          <div class="control-group-main">
+            <button id="opt-c-apply-btn" class="btn btn-success">
+              ✅ Chấp Nhận & Áp Dụng Bản Vá (Apply Fix)
+            </button>
+            <button id="opt-c-custom-btn" class="btn btn-secondary">
+              ✏️ Tùy Chỉnh Mã Nguồn Trước Khi Áp Dụng (Customize)
+            </button>
+          </div>
+          
+          <div class="control-group-recovery">
+            <button id="opt-c-reject-btn" class="btn btn-outline">
+              ❌ Bác Bỏ Bản Vá (Reject)
+            </button>
+            <button id="opt-c-rollback-btn" class="btn btn-warning-outline">
+              ⏪ Khôi Phục Mã Gốc (Rollback)
+            </button>
+            <button id="opt-c-wrong-btn" class="btn btn-danger-outline">
+              🚩 Báo AI Đoán Sai (Report Wrong)
+            </button>
+            <button id="opt-c-reset-btn" class="btn btn-outline">
+              🔄 Làm Mới Option C
+            </button>
+          </div>
+        </div>
+
+        <!-- Custom Edit Box (Hidden by default) -->
+        <div id="opt-c-custom-box" class="custom-edit-container hidden">
+          <h4>Tùy chỉnh mã nguồn đề xuất trước khi áp dụng:</h4>
+          <label for="opt-c-custom-textarea" class="sr-only">Tùy chỉnh mã server.js</label>
+          <textarea id="opt-c-custom-textarea" rows="8" class="custom-textarea"></textarea>
+          <div class="custom-actions mt-2">
+            <button id="opt-c-save-custom-btn" class="btn btn-primary btn-sm">Áp dụng mã tùy chỉnh này vào server.js</button>
+            <button id="opt-c-cancel-custom-btn" class="btn btn-outline btn-sm">Hủy tùy chỉnh</button>
+          </div>
+        </div>
+
+        <!-- Feedback & Notification Output -->
+        <div id="opt-c-notification" class="notification-box hidden" role="status" aria-live="polite"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>Căn cứ kỹ thuật: <a href="https://docs.cloud.google.com/run/docs/container-contract#port" target="_blank" rel="noopener">Google Cloud Run Container Contract Specification</a></p>
+      <p>Bản quyền bài lab: Codelab VLearn K4 Track 1 · Người thực hiện: <strong>Trần Phạm Thái Vũ</strong> (MHV: <code>2A202602695</code>) · Nhóm <strong>Tomorrow</strong></p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
