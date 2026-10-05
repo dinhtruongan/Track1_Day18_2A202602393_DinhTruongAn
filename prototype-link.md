@@ -4,7 +4,7 @@
 
 **Bản clone local:** `C:\Users\Administrator\OneDrive\Desktop\pm\Day19-source-ThaiVu\prototype\index.html`. Mở file này bằng trình duyệt; CSS/JS nằm cùng thư mục. Ba tab A/B/C là ba phương án của cùng prototype. Đường dẫn GitHub ở trên là link mã nguồn, không phải link demo chạy trực tiếp.
 
-**Demo HTTPS chia sẻ được:** chưa có đường dẫn đã xác nhận. Cần host bộ static `index.html`, `style.css`, `app.js` rồi thay link ở đây trước khi nộp.
+**Demo A/B/C:** [Mở prototype Tomorrow](https://dinhtruongan.github.io/Track1_Day18_2A202602393_DinhTruongAn/). Chọn tab A, B hoặc C trong cùng trang. Mã prototype kế thừa từ Vũ được lưu ở nhánh `gh-pages`; nhánh `main` giữ đúng sáu tệp báo cáo.
 
 ## Tổ chức trải nghiệm
 
@@ -19,3 +19,4 @@ Dùng cùng code/log và task cho cả ba. Reset từng option trước mỗi te
 Ở C có kịch bản bản vá sai chỉ xử lý Dockerfile, bỏ qua code. Sau happy path, đưa cùng kịch bản này cho mỗi tester và ghi phản ứng; không nhắc trước họ phải Reject hoặc Rollback. Đánh dấu khi facilitator can thiệp.
 
 App dùng canned output, mô phỏng deploy và lưu scratchpad cục bộ. Không gọi LLM/Cloud Run thật; kiểm tra mẫu code không phải validator JavaScript tổng quát hay bằng chứng deploy production thành công.
+

@@ -24,7 +24,7 @@ Notes Day 17 của Vũ kể việc hỏi AI từng bước, đối chiếu tài 
 | B — Hướng dẫn từng bước | Hệ thống hỏi chẩn đoán, đề xuất ba bước; người học sửa/duyệt từng bước | Người học duyệt mỗi bước | Nhiều thao tác hơn, có thể giúp hiểu quy trình |
 | C — Bản vá chủ động | Hệ thống tạo diff; người học xem, chỉnh hoặc bác bỏ trước khi áp dụng | Người học duyệt bản vá | Nhanh hơn ở happy path, cần kiểm tra để tránh nhận bản vá sai |
 
-Cả ba dùng cùng một lỗi Cloud Run giả lập, cùng code/log và cùng nhiệm vụ. Không chạy deploy thật hay gọi model thật. Canned output và điểm 92%/45% trong prototype là dữ liệu mô phỏng, không phải độ tin cậy được đo. [Cách mở prototype](prototype-link.md).
+Cả ba dùng cùng một lỗi Cloud Run giả lập, cùng code/log và cùng nhiệm vụ. Không chạy deploy thật hay gọi model thật. Canned output và điểm 92%/45% trong prototype là dữ liệu mô phỏng, không phải độ tin cậy được đo. [Trải nghiệm A/B/C](https://dinhtruongan.github.io/Track1_Day18_2A202602393_DinhTruongAn/) · [Nguồn và cách mở](prototype-link.md).
 
 ## 4. Đóng góp cá nhân
 
@@ -50,5 +50,6 @@ Codex đọc repo nguồn, đối chiếu VLearn, tổng hợp ba notes Day 17 v
 | Evidence Continuity | Có nguồn Day 17 và hypothesis năm thành tố; hậu quả vẫn là giả thuyết |
 | Meaningful Options | Có ba cơ chế khác nhau trên cùng task |
 | Human Control | Có design pass cho expectation, agency, evidence, recovery |
-| Test-ready | Có source prototype chạy local; chưa xác nhận link demo HTTPS chia sẻ được cho TA/tester |
+| Test-ready | Đã cấu hình GitHub Pages công khai cho prototype A/B/C; chưa có dữ liệu thao tác của tester |
 | Learning, Not Praise | Có tổng hợp Day 17; ma trận feedback A/B/C chờ ba phiên kiểm thử |
+
